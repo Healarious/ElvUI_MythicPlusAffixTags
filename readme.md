@@ -1,6 +1,4 @@
 # ElvUI_MythicPlusAffixTags
-## Download
-[Link can be found here](https://github.com/Healarious/AddOns/releases/download/v1.0-ElvUI_MythicPlusTags/ElvUI_MythicPlusAffixTags.zip)
 ## Usage
 1. type `/ec` to bring up the ElvUI configuration panel
 2. Go to `UnitFrames` and then `Party Frames`
@@ -16,5 +14,8 @@
 - `[affix:grievous]` this will display the amount of grievous stacks
 - `[affix:grievous-percent]` this will display the % amount of hp loss/s
 
-## Small suggestion
-I personally use this in conjunction with [ElvUI_ColorTags](http://www.tukui.org/addons/index.php?act=view&id=245) which allows you to color your tags.
+## Copy Pasta
+### Percentages format:
+ `[affix:necrotic-rot-percent][affix:bursting-percent][affix:grievous-percent]`
+### Stacks format:
+`[affix:necrotic-rot][affix:bursting][affix:grievous]`

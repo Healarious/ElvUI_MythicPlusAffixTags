@@ -1,65 +1,69 @@
 local ElvUF = ElvUI.oUF
 
-local GetDebuffCountAgressive = function(unit_arg, name_arg, spellId_arg)
-	for i=1, 40 do
-		local name, _, _, count, _, _, _, _, _, _, spellId, _ = UnitDebuff(unit_arg, i)
-		if name == name_arg and spellId == spellId_arg then
-			return count
-		end
-	end
-	return nil
-end
-
-
 ElvUF.Tags.OnUpdateThrottle["affix:necrotic-rot"] = 0.2
 ElvUF.Tags.Methods["affix:necrotic-rot"] = function(unit)
-	return GetDebuffCountAgressive(unit, "Necrotic Rot", 209858)
+	local rot = select(4, UnitDebuff(unit, GetSpellInfo(209858)))
+	local str = ""
+	if rot then
+		str = rot
+	end
+	return WrapTextInColorCode(str, "ffbfff00").."|r"
 end
 
 ElvUF.Tags.OnUpdateThrottle["affix:necrotic-rot-percent"] = 0.2
 ElvUF.Tags.Methods["affix:necrotic-rot-percent"] = function(unit)
-	local count = GetDebuffCountAgressive(unit, "Necrotic Rot", 209858)
-	if count ~= nil then
-		return (count*3).. "%"
-	else
-		return ""
+	local rot = select(4, UnitDebuff(unit, GetSpellInfo(209858)))
+	local str = ""
+	if rot then
+		str = (rot*3).. "%"
 	end
+	return WrapTextInColorCode(str, "ffbfff00").."|r"
 end
 
 ElvUF.Tags.OnUpdateThrottle["affix:bursting"] = 0.2
 ElvUF.Tags.Methods["affix:bursting"] = function(unit)
-	return GetDebuffCountAgressive(unit, "Burst", 240443)
+	local bursting = select(4, UnitDebuff(unit, GetSpellInfo(240443)))
+	local str = ""
+	if bursting then
+		str = bursting
+	end
+	return WrapTextInColorCode(str, "ffff4500").."|r"
 end
 
 ElvUF.Tags.OnUpdateThrottle["affix:bursting-percent"] = 0.2
 ElvUF.Tags.Methods["affix:bursting-percent"] = function(unit)
-	local count = GetDebuffCountAgressive(unit, "Burst", 240443)
-	if count ~= nil then
-		return (count*2.5).. "%/s"
-	else
-		return ""
+	local bursting = select(4, UnitDebuff(unit, GetSpellInfo(240443)))
+	local str = ""
+	if bursting then
+		str = (bursting*2.5).. "%/s"
 	end
+	return WrapTextInColorCode(str, "ffff4500").."|r"
 end
 
 ElvUF.Tags.OnUpdateThrottle["affix:grievous"] = 0.2
 ElvUF.Tags.Methods["affix:grievous"] = function(unit)
-	return select(4, UnitDebuff(unit, "Grievous Wound"))
+	local grievous = select(4, UnitDebuff(unit, GetSpellInfo(240559)))
+	local str = ""
+	if grievous then
+		str = grievous
+	end
+	return WrapTextInColorCode(str, "ffff0000").."|r"
 end
 
 ElvUF.Tags.OnUpdateThrottle["affix:grievous-percent"] = 0.2
 ElvUF.Tags.Methods["affix:grievous-percent"] = function(unit)
-	local count = select(4, UnitDebuff(unit, "Grievous Wound"))
-	if count == 1 then
-		return "2 %"
-	elseif count == 2 then
-		return "5 %"
-	elseif count == 3 then
-		return "7 %"
-	elseif count == 4 then
-		return "10 %"
-	elseif count == 5 then
+	local grievous = select(4, UnitDebuff(unit, GetSpellInfo(240559)))
+	local str = ""
+	if grievous == 1 then
+		str = "2 %"
+	elseif grievous == 2 then
+		str = "5 %"
+	elseif grievous == 3 then
+		str = "7 %"
+	elseif grievous == 4 then
+		str = "10 %"
+	elseif grievous == 5 then
 		return "12 %"
-	else
-		return ""
 	end
+	return WrapTextInColorCode(str, "ffff0000").."|r"
 end
